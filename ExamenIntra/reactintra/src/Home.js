@@ -12,7 +12,7 @@ const Home = () => {
         }
         getUserGuess()
         
-    }, [userGuess.answer])
+    }, [userGuessList])
 
     const fetchUserGuess = async () => {
         const res = await fetch('http://localhost:9191/userGuess/get-all-userGuess')
@@ -27,7 +27,7 @@ const Home = () => {
        console.log(userGuess)
 
        postUserGuess(userGuess)
-        .then((data) => setUserGuess(data))
+        .then(() => setUserGuess(userGuess))
         .catch((err) => console.log(err))
        
     }
@@ -70,7 +70,7 @@ const Home = () => {
             </form>
             <div className="container p-4 text-center">
                 <h2>{userGuess.answer}</h2>
-                <h2>{userGuess.guess === userGuess.answer && userGuess.answer !="" ? 'Bravo' : showMessage(userGuess.answer) }</h2>
+                <h2>{userGuess.guess === userGuess.answer && userGuess.answer !=="" ? 'Bravo' : showMessage(userGuess.answer) }</h2>
             </div>
             <div className="container p-4 ">
                 <table className="table table-hover bg-light">
@@ -79,11 +79,10 @@ const Home = () => {
                             <th scope="col">Nom</th>
                             <th scope="col">Guess d'utlisateur</th>
                             <th scope="col">Numero Random</th>
-                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {userGuessList.length < 1 ? 'no userGuess' : userGuessList.map((userGuess) => (
+                        {userGuessList.map((userGuess) => (
                             <tr key={userGuess.id}>
                                 <th>{userGuess.name}</th>
                                 <td>{userGuess.guess}</td>
