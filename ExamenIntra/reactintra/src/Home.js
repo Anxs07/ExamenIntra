@@ -12,7 +12,7 @@ const Home = () => {
         }
         getUserGuess()
         
-    }, [userGuessList])
+    }, [userGuess])
 
     const fetchUserGuess = async () => {
         const res = await fetch('http://localhost:9191/userGuess/get-all-userGuess')
@@ -27,7 +27,7 @@ const Home = () => {
        console.log(userGuess)
 
        postUserGuess(userGuess)
-        .then(() => setUserGuess(userGuess))
+        .then(() => setUserGuess({...userGuess, answer: userGuess.answer}))
         .catch((err) => console.log(err))
        
     }
